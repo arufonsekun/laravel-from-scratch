@@ -1,0 +1,20 @@
+- Banner rotativo 
+- Mapa incorporado do Google Maps(iframe) com ícone personalizado(Maps API com JavaScript)
+- Conter um formulário funcional para envio de e-mail
+    - Utilizar a classe PHPMailer para enviar o e-mail
+- Conter um formulário para realizar cadastro para newsletter (exemplo: http://inviolavel.com)
+    - O formulário deverá conter o campo "nome" e "email", e o botão "cadastrar". Ao clicar em cadastrar, armazenar os dados do formulário em uma tabela no banco de dados.
+
+- O site deve ser responsivo.
+- Caso tenha mais de uma página, utilizar mod_rewrite(Apache) para URL amigável
+
+Tecnologias a serem utilizadas:
+   - HTML5 semântico
+   - CSS3
+   - jQuery*
+   - PHPMailer*
+   - Bootstrap 4*
+   - Utilizar AJAX ao menos uma vez(pode ser para enviar os formulários)
+   - PHP*
+   - MySQL*
+   - Apache
