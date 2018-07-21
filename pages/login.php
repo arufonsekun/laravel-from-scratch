@@ -1,25 +1,24 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>login</title>
 	<?php
 
-		include_once "includes/head.php"
+		include_once "../front-end/includes/head.php";
 
 	?>
+	<title>login</title>
 </head>
 <body>
 		<!--Header-->
 		<?php
 
-			include_once "includes/header.php"
+			include_once "../front-end/includes/header.php";
 
 		?>
 		<main role = "main">
 			
 			<div class="container-fluid">
-				<img src = "http://localhost/task-manager/img/tasks.jpg" class="img-fluid rounded login-img">
-			</img>
+				<img src = "http://localhost/task-manager/front-end/img/tasks.jpg" class="img-fluid rounded login-img">
+				</img>
 				<div class = "row  login-card">
 					<div class="offset-md-4"></div>
 					<div class="col-md-3">
@@ -38,14 +37,14 @@
 
 	<?php
 
-		include_once "includes/footer.php";
+		include_once "../front-end/includes/footer.php";
 
 	?>
 
 	<!--jquery, bootstrap-4 scritps, etc-->
 	<?php
 
-		include_once "includes/scripts.php";
+		include_once "../front-end/includes/scripts.php";
 
 	?>
 </body>
