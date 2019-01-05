@@ -15,16 +15,15 @@
 
 		?>
 		<main role = "main">
-			
-			<div class="container-fluid">
-				<img src = "http://localhost/task-manager/front-end/img/tasks.jpg" class="img-fluid rounded login-img">
+
+			<div class = "row login-card">
+				<img src = "http://task.manager/front-end/img/tasks.jpg" class="img-fluid rounded login-img">
 				</img>
-				<div class = "row  login-card">
 					<div class="offset-md-4"></div>
 					<div class="col-md-3">
-						<div class="card">
+						<div class="card card-login">
 						  <div class="card-body">
-						    <h5 class="card-title">Entrar</h5>
+						    <h5 class="card-title">Login</h5>
 						    <input type="text" class="form-control login-input" aria-label="input" placeholder="Username">
 						    <input type="password" class="form-control login-input" aria-label="input" placeholder="Password">
 						    <button class="btn btn-outline-success btn-block">Log in</button>

@@ -1,5 +1,5 @@
 header{
-	background-color: #eee;
+
 }
 
 h3{
@@ -16,16 +16,7 @@ h3{
 	-webkit-filter: blur(3px);
 }
 
-.login-card{
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin-left: 20px;
-  margin-right: 20px;
-}
-
-
-.card{
+.card-login{
 	margin-top: 30vh;
 	margin-bottom: 30vh;
 }
@@ -39,9 +30,9 @@ h3{
 }
 
 footer{
-	margin-top: 50%;
+	margin-top: 5vh;
 	position: relative;
-	background-color: #eee;
+	background-color: #ddefce;
 }
 
 ul{

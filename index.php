@@ -1,4 +1,5 @@
 <?php
+
 	include_once "back-end/classes/application.php";
 	$application = new Application();
 
@@ -8,5 +9,5 @@
 	}else{
 		header("location:pages/home.php");
 	}
-	
+
 ?>
