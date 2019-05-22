@@ -11,6 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/task','TaskController@index');
+Route::resource('/', 'UserController');
+Route::get('/login', 'UserController@index')->name('tasks.login');
+Route::get('/sign', 'UserController@create')->name('tasks.signin');
+Route::resource('/create', 'UserController');
