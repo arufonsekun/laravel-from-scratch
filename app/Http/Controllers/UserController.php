@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('tasks.login');
+        return view('user.login');
     }
 
     /**
@@ -24,7 +24,19 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('tasks.signin');
+        return view('user.signin');
+    }
+
+    public function login(Request $request)
+    {
+		$uname = User::where('username', '=', $request->username)->count();
+		$password = User::where('password', '=', $request->password)->count();
+
+		if ($uname > 0 && $password > 0) {
+			return redirect()->route('task.task');
+		} else {
+			return view('user.login');
+		}
     }
 
     /**
@@ -41,7 +53,7 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => $request->password
         ]);
-        return redirect()->route('tasks.login');
+        return redirect()->route('user.login');
     }
 
     /**
@@ -66,7 +78,7 @@ class UserController extends Controller
         //
     }
 
-    /**
+    /** PUT and PATH
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

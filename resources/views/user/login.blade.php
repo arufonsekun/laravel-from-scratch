@@ -6,7 +6,7 @@
         <div class="navbar-nav-scroll">
             <ul class="navbar-nav flex-row">
                 <li>
-                    <a href="{{ route('tasks.signin') }}" class="nav-link text-light">
+                    <a href="{{ route('user.create') }}" class="nav-link text-light">
                         New Account
                     </a>
                 </li>
@@ -21,13 +21,15 @@
                     Login
                 </div>
                 <div class="card-body">
-                    <div class="form-group">
-                        <input class = "form-control" type="text" name="username" value="" placeholder="Username">
-                    </div>
-                    <div class="form-group">
-                        <input class = "form-control" type="password" name="username" value="" placeholder="Password">
-                    </div>
-                    <button class = "btn btn-dark btn-block" type="button" name="button">Login</button>
+                  <form class="form" action="{{ route('user.login') }}" method="POST">
+                      <div class="form-group">
+                          <input class = "form-control mt-2" type="text" name="username" value="" placeholder="Username">
+                      </div>
+                      <div class="form-group">
+                          <input class = "form-control mt-4" type="password" name="username" value="" placeholder="Password">
+                      </div>
+                      <button class = "btn btn-dark btn-block" type="submit" name="button">Login</button>
+                  </form>
                 </div>
             </div>
         </div>

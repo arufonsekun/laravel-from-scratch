@@ -6,13 +6,13 @@
 </header>
 
 <div class="container-fluid mt-5">
-    <div class="mx-auto col-md-4 col-sm-4 col-lg-4 mt-4">
+    <div class="mx-auto col-md-3 col-sm-4 col-lg-4 col-xl-3 mt-4">
         <div class="card border-dark">
             <div class="card-header border-dark">
                 Sign In Form
             </div>
                 <div class="card-body">
-                    <form class="form" action="{{ route('create.store') }}" method="POST">
+                    <form class="form" action="{{ route('user.store') }}" method="POST">
                         @csrf
                         <div class="form-group">
                             <input class = "form-control" type="text" name="name" value="" placeholder="Name">

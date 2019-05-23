@@ -24,13 +24,7 @@ class TaskController extends Controller
      */
     public function create(Request $request)
     {
-        $task = $Task::create([
-            'name' : $request->name,
-            'username' : $request->username,
-            'email' : $request->email,
-            'password' : $request->password
-        ]);
-        return redirect()->route('tasks.login');
+    
     }
 
     /**
