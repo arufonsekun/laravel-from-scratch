@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Log;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -29,13 +29,16 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
+		dd($request->username, $request->password );
 		$uname = User::where('username', '=', $request->username)->count();
 		$password = User::where('password', '=', $request->password)->count();
+
 
 		if ($uname > 0 && $password > 0) {
 			return redirect()->route('task.task');
 		} else {
-			return view('user.login');
+			return redirect()->route('user.index');
+			// return view('tasks.task');
 		}
     }
 

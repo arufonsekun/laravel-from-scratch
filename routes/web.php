@@ -15,4 +15,4 @@ Route::get('/task','TaskController@index');
 Route::resource('/', 'UserController');
 // Route::get('/sign', 'UserController@create')->name('tasks.signin');
 Route::resource('/user', 'UserController');
-Route::post('/user/login', 'UserController@login')->name('user.login');
+Route::post('user/login', 'UserController@login')->name('login');

@@ -21,12 +21,13 @@
                     Login
                 </div>
                 <div class="card-body">
-                  <form class="form" action="{{ route('user.login') }}" method="POST">
+                  <form class="form" action="{{ route('login') }}" method="POST">
+					  @csrf
                       <div class="form-group">
                           <input class = "form-control mt-2" type="text" name="username" value="" placeholder="Username">
                       </div>
                       <div class="form-group">
-                          <input class = "form-control mt-4" type="password" name="username" value="" placeholder="Password">
+                          <input class = "form-control mt-4" type="password" name="password" value="" placeholder="Password">
                       </div>
                       <button class = "btn btn-dark btn-block" type="submit" name="button">Login</button>
                   </form>
