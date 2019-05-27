@@ -14,6 +14,7 @@ class TaskController extends Controller
      */
     public function index()
     {
+        // $this.middleware('auth');
         return view('tasks.task');
     }
 
@@ -24,7 +25,7 @@ class TaskController extends Controller
      */
     public function create(Request $request)
     {
-    
+
     }
 
     /**

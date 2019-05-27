@@ -1,9 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Log;
-use App\User;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use App\User;
+use Auth;
 
 class UserController extends Controller
 {
@@ -14,7 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('user.login');
+        return view('user.login', ["message" => '']);
     }
 
     /**
@@ -27,21 +31,34 @@ class UserController extends Controller
         return view('user.signin');
     }
 
+
+    /*
+     * Authenticates the user
+     */
     public function login(Request $request)
     {
-		dd($request->username, $request->password );
-		$uname = User::where('username', '=', $request->username)->count();
-		$password = User::where('password', '=', $request->password)->count();
+        $reqUserName = $request->username;
+        $reqPassword = $request->password;
 
+        $userModel = DB::table('users')->where('username', $reqUserName)->first();
 
-		if ($uname > 0 && $password > 0) {
-			return redirect()->route('task.task');
-		} else {
-			return redirect()->route('user.index');
-			// return view('tasks.task');
-		}
-    }
+        if ($userModel == null){
 
+            return redirect()->route('user.index')->with('message', 'Incorrect Username');
+
+        } else if($userModel != null && password_verify($reqPassword, $userModel->password)) {
+
+            auth()->loginUsingId($userModel->id);
+            // dd($Auth::check());
+            return redirect()->route('task.index');
+
+        } else {
+
+            return redirect()->route('user.index')->with('message', 'Incorrect Password');
+
+        }
+
+}
     /**
      * Store a newly created resource in storage.
      *
