@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Task;
 
 class TaskController extends Controller
@@ -14,8 +15,16 @@ class TaskController extends Controller
      */
     public function index()
     {
-        // $this.middleware('auth');
-        return view('tasks.task');
+
+        if (Auth::check())
+        {
+            return redirect()->route('task.index');
+        }
+        else
+        {
+            return redirect()->route('user.login')->with(["message" => 'User not authenticated']);
+        }
+
     }
 
     /**

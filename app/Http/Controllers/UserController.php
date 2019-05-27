@@ -6,8 +6,9 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\User;
-use Auth;
+
 
 class UserController extends Controller
 {
@@ -18,7 +19,14 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('user.login', ["message" => '']);
+        if (Auth::check())
+        {
+            return redirect()->route('task.index');
+        }
+        else
+        {
+            return redirect()->route('user.login')->with(["message" => 'User not authenticated']);
+        }
     }
 
     /**
@@ -37,28 +45,22 @@ class UserController extends Controller
      */
     public function login(Request $request)
     {
-        $reqUserName = $request->username;
-        $reqPassword = $request->password;
+        $credentials = $request->only('username', 'password');
 
-        $userModel = DB::table('users')->where('username', $reqUserName)->first();
+        // dd($credentials);
 
-        if ($userModel == null){
+        if (Auth::attempt($credentials)) {
 
-            return redirect()->route('user.index')->with('message', 'Incorrect Username');
-
-        } else if($userModel != null && password_verify($reqPassword, $userModel->password)) {
-
-            auth()->loginUsingId($userModel->id);
-            // dd($Auth::check());
             return redirect()->route('task.index');
 
         } else {
 
-            return redirect()->route('user.index')->with('message', 'Incorrect Password');
+            return redirect()->route('user.index')
+            ->with('response', 'Incorrect Password or Username');
 
         }
+    }
 
-}
     /**
      * Store a newly created resource in storage.
      *

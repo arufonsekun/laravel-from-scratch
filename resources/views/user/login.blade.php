@@ -29,9 +29,9 @@
                       <div class="form-group">
                           <input class = "form-control mt-4" type="password" name="password" value="" placeholder="Password">
                       </div>
-                      @if (session('message'))
+                      @if (session('response'))
                       <div class = "alert alert-danger" role="alert">
-                          {{session('message')}}
+                          <small>{{session('response')}}</small>
                       </div>
                       @endif
                       <button class = "btn btn-dark btn-block" type="submit" name="button">Login</button>
