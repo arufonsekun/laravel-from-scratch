@@ -2,124 +2,85 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\User;
-
+use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the users
      *
-     * @return \Illuminate\Http\Response
+     * @param  \App\User  $model
+     * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(User $model)
     {
-        if (Auth::check())
-        {
-            return redirect()->route('task.index');
-        }
-        else
-        {
-            return redirect()->route('user.login')->with(["message" => 'User not authenticated']);
-        }
+        return view('users.index', ['users' => $model->paginate(15)]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new user
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
-        return view('user.signin');
-    }
-
-
-    /*
-     * Authenticates the user
-     */
-    public function login(Request $request)
-    {
-        $credentials = $request->only('username', 'password');
-
-        // dd($credentials);
-
-        if (Auth::attempt($credentials)) {
-
-            return redirect()->route('task.index');
-
-        } else {
-
-            return redirect()->route('user.index')
-            ->with('response', 'Incorrect Password or Username');
-
-        }
+        return view('users.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created user in storage
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  \App\Http\Requests\UserRequest  $request
+     * @param  \App\User  $model
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(UserRequest $request, User $model)
     {
-        $user = User::create([
-            'name' => $request->name,
-            'username' => $request->username,
-            'email' => $request->email,
-            'password' => $request->password
-        ]);
-        return redirect()->route('user.login');
+        $model->create($request->merge(['password' => Hash::make($request->get('password'))])->all());
+
+        return redirect()->route('user.index')->withStatus(__('User successfully created.'));
     }
 
     /**
-     * Display the specified resource.
+     * Show the form for editing the specified user
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  \App\User  $user
+     * @return \Illuminate\View\View
      */
-    public function show($id)
+    public function edit(User $user)
     {
-        //
+        return view('users.edit', compact('user'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Update the specified user in storage
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  \App\Http\Requests\UserRequest  $request
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function edit($id)
+    public function update(UserRequest $request, User  $user)
     {
-        //
-    }
+        $user->update(
+            $request->merge(['password' => Hash::make($request->get('password'))])
+                ->except([$request->get('password') ? '' : 'password']
+        ));
 
-    /** PUT and PATH
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        return redirect()->route('user.index')->withStatus(__('User successfully updated.'));
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified user from storage
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(User  $user)
     {
-        //
+        $user->delete();
+
+        return redirect()->route('user.index')->withStatus(__('User successfully deleted.'));
     }
 }

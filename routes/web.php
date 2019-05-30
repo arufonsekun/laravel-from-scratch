@@ -11,17 +11,16 @@
 |
 */
 
-use App\Http\Middleware\Authenticate;
+Route::get('/', function () {
+    return view('welcome');
+});
+Auth::routes();
 
-// index page of task resource
-Route::resource('/task','TaskController');
+Route::get('/home', 'HomeController@index')->name('home');
 
-//user index page if logged redirect to task index page, login page otherwise
-Route::resource('/', 'UserController');
-
-//handles post, get, put, delete, http methods
-Route::resource('/user', 'UserController');
-
-//handles login post
-Route::post('user/login', 'UserController@login')->name('login');
-// Route::get('/sign', 'UserController@create')->name('tasks.signin');
+Route::group(['middleware' => 'auth'], function () {
+	Route::resource('user', 'UserController', ['except' => ['show']]);
+	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
+	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
+	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
+});
