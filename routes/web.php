@@ -12,8 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
+//Illuminate/Suport/Facades/Auth.php
+//Illuminate/Routing/Router.php
+//User validation and Authentication
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
